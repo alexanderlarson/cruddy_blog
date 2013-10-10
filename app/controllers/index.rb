@@ -30,7 +30,7 @@ get '/all/:user_id' do
 end
 
 
-get '/:post_id' do############################################
+get '/post/:post_id' do############################################
   @post = Post.find(params[:post_id])
   erb :singlepost
 end
@@ -44,7 +44,21 @@ get '/newpost' do####not taking sessions
   end
 end
 
+post '/post/:post_id' do#########################################
+  @post_id = params[:post_id]
+  @user_id = session[:id]
+  redirect "/post/#{@post_id}"
+end
 
+post '/newpost/:user_id' do########################################
+    @user_id = params[:user_id]
+    @post = Post.create(title: params[:title], content: params[:content], user_id: @user_id)
+  redirect "all/#{@user_id}"
+end
+
+
+
+#######OK
 get '/logout' do
   session.clear
   redirect '/'
@@ -61,20 +75,9 @@ post '/login' do
     else
       redirect '/login'
     end
-  erb :profile
 end
 
-post '/post/:post_id' do
-  @post_id = params[:post_id]
-  @user_id = session[:id]
-  redirect "/post/#{@post_id}"
-end
 
-post '/newpost/:user_id' do
-    @user_id = params[:user_id]
-    @post = Post.create(title: params[:title], url: params[:url], user_id: @user_id)
-  redirect "all/#{@user_id}"
-end
 
 ########OK
 post '/newuser' do
