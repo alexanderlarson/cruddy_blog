@@ -6,13 +6,15 @@ html {
   background-size: cover;
 }
 
+
 .container {
   margin: 20px auto;
-  width: 700px;
+  width: 720px;
   padding: 0px 20px 20px 20px;
-  border: 3px solid #777;
+  border: 20px solid #777;
   background-color: #DDD;  
-  border-radius: 3px;
+  border-radius: 15px;
+  text-align: center;
 }
 th {
   text-align: left;

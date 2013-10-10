@@ -1,13 +1,17 @@
-<h2>Did you see that ludicrous display last night??</h2>
+<h1>Hey!</h1>
 
-<table>  
-  <% @allposts.reverse.each do |post| %>
-   <tr>
-      <td>
-        <a href="<%= post.title %>"><%= post.title %></a>
-      </td>
+<form action="/login" method="POST">
+  Email<br><input type="email" name="email"><br>
+  Password<br><input type="password" name="password"><br>
+  <br><input type="submit" value="submit" id="submit">
+</form>
 
-   </tr>  
-  <% end %>  
-</table>
-</div>
+<h1>Arsenal fan? We still love you.</h1>
+<h2>Sign up!</h2>
+
+<form action="/newuser" method="POST">
+  Username<br><input type="username" name="newuser[username]"><br>
+  Email<br><input type="email" name="newuser[email]"><br>
+  Password<br><input type="password" name="newuser[password]"><br>
+  <br><input type="submit" value="submit" id="submit">
+</form>
