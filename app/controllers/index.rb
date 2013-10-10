@@ -6,7 +6,12 @@ get '/' do
 end
 
 get '/login' do
-  erb :login
+  erb :index
+end
+
+get '/all' do
+  @allposts = Post.all
+  erb :all
 end
 
 get '/profile/:user_id' do
@@ -18,19 +23,18 @@ end
 get '/all/:user_id' do
   @user = User.find(params[:user_id])
   @user_posts = @user.posts
-  erb :all
+  erb :alluser
 end
 
 get '/post/:post_id' do
   @post = Post.find(params[:post_id])
-  @comments = @post.comments
   erb :singlepost
 end
 
 get '/newpost' do
   if current_user
     @user_id = current_user.id
-   erb :newpost
+   erb :new_post
   else
     redirect '/login'
   end
@@ -57,7 +61,6 @@ end
 post '/post/:post_id' do
   @post_id = params[:post_id]
   @user_id = session[:id]
-
   redirect "/post/#{@post_id}"
 end
 
