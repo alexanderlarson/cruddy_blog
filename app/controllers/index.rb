@@ -44,6 +44,16 @@ get '/newpost' do
   end
 end
 
+get '/post/:post_id/edit' do
+
+end
+
+get '/post/:post_id/destroy' do
+  post = Post.find(params[:post_id])
+  post.destroy
+  redirect '/all'
+end
+
 post '/post/:post_id' do#########################################
   @post_id = params[:post_id]
   @user_id = session[:id]
@@ -55,6 +65,7 @@ post '/newpost' do
   @post = Post.create(title: params[:title], content: params[:content], user_id: session[:id])
   redirect "/all/#{@user_id}"
 end
+
 
 
 
