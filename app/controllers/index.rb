@@ -30,13 +30,13 @@ get '/all/:user_id' do
 end
 
 
-get '/post/:post_id' do############################################
+get '/post/:post_id' do
   @post = Post.find(params[:post_id])
   erb :singlepost
 end
 
-get '/newpost' do####not taking sessions
-  if current_user###################################################
+get '/newpost' do
+  if current_user
     @user_id = current_user.id
    erb :new_post
   else
@@ -50,10 +50,10 @@ post '/post/:post_id' do#########################################
   redirect "/post/#{@post_id}"
 end
 
-post '/newpost/:user_id' do########################################
-    @user_id = params[:user_id]
-    @post = Post.create(title: params[:title], content: params[:content], user_id: @user_id)
-  redirect "all/#{@user_id}"
+post '/newpost' do
+  @user_id = session[:id]
+  @post = Post.create(title: params[:title], content: params[:content], user_id: session[:id])
+  redirect "/all/#{@user_id}"
 end
 
 
